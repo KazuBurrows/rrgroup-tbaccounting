@@ -1,4 +1,4 @@
-// import logoBlue from '../assets/images/logoBlue.png';
+import logo from '../assets/images/tb-accounting-logo.png';
 
 type NavItem = {
   name: string;
@@ -17,8 +17,8 @@ function Navbar() {
       id="navbar"
       className="fixed top-0 left-0 z-50 flex w-full bg-[#172b4d] py-6 sm:px-16 px-4 items-center"
     >
-      <div className="navbar-logo w-[50px]">
-        <a href="/"><img src={""} alt='TBA Logo'></img></a>
+      <div className="navbar-logo w-[75px]">
+        <a href="/"><img src={logo} alt='TBA Logo'></img></a>
       </div>
 
       <div className="flex ml-auto gap-6 px-8 text-indigo-600 text-lg font-bold uppercase">

@@ -1,18 +1,33 @@
+import React, { useRef } from "react";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+
 import bg from "../assets/images/p31.svg";
+import ServiceCard from "./ServiceCard";
+
+
 
 function Services() {
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    mode: "free",
+    slides: {
+      perView: 1,
+      spacing: 10,
+    },
+  });
   return (
     <div
       id="services"
-      className="relative w-full h-[800px] bg-[#172b4d] bg-cover bg-center bg-no-repeat flex items-center"
+      className="relative w-full h-full bg-[#172b4d] bg-cover bg-center bg-no-repeat items-center"
     >
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `url(${bg})`,
         }}
       ></div>
-      <div className="w-2/5 h-full mx-auto pt-24 pb-24 text-center">
+      <div className="w-2/5 mx-auto pt-24 text-center">
         <h1 className="text-white text-5xl font-bold py-10">
           Build something great
           <br />
@@ -25,8 +40,10 @@ function Services() {
           designed to meet your unique needs.
         </h3>
       </div>
-      <div className="flex">
-        
+      <div className="flex py-16 gap-4 justify-center">
+        <ServiceCard title={"Financing"} colour={"#5e72e4"} skills={["End-of-Year Finance Reports", "Monthly Management Reports", "Budget/Forecasting"]} link={"/"}></ServiceCard>
+        <ServiceCard title={"Tax"} colour={"#2dce89"} skills={["Tax Planning", "Income Tax Services", "GST Registration and Returns"]} link={"/"}></ServiceCard>
+        <ServiceCard title={"PAYE"} colour={"#fb6340"} skills={["PAYE Services", "Intermediary Services"]} link={"/"}></ServiceCard>
       </div>
     </div>
   );
