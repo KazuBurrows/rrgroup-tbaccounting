@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import ReviewCard from "./ReviewCard";

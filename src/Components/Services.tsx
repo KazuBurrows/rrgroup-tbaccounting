@@ -1,21 +1,9 @@
-import React, { useRef } from "react";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-
 import bg from "../assets/images/p31.svg";
 import ServiceCard from "./ServiceCard";
 
 
 
 function Services() {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    mode: "free",
-    slides: {
-      perView: 1,
-      spacing: 10,
-    },
-  });
   return (
     <div
       id="services"

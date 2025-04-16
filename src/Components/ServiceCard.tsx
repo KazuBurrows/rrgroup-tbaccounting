@@ -21,7 +21,7 @@ function ServiceCard({ title, colour, skills, link }: ServiceProps) {
 
         ))}
       </ul>
-      <a href={link} target='_blank' style={{ backgroundColor: colour }} className="py-3 px-6 text-white font-semibold uppercase rounded-md">Learn More</a>
+      <a href={link} target='_blank' rel="noreferrer" style={{ backgroundColor: colour }} className="py-3 px-6 text-white font-semibold uppercase rounded-md">Learn More</a>
     </div>
   );
 }
