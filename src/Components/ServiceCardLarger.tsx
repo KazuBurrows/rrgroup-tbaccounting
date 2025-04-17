@@ -14,7 +14,7 @@ function ServiceCardLarge({ title, subTitle, desc, icon }: ServiceProps) {
       style={{
         boxShadow: "0 15px 35px #32325d1a, 0 5px 15px #00000012",
       }}
-      className="w-[670px] text-[#172b4d] py-16 px-8 my-8 bg-white rounded-md text-center mx-auto"
+      className="md:w-[670px] w-11/12 text-[#172b4d] py-8 px-8 my-8 bg-white rounded-md text-center mx-auto"
     >
       <div className="mb-8 w-[60px] h-[60px] bg-[#8a98eb80] rounded-full mx-auto flex items-center justify-center">
         <FontAwesomeIcon icon={icon} className="text-white text-4xl" />

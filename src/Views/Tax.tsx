@@ -27,10 +27,10 @@ function Tax() {
       style={{
         backgroundImage: `url(${bg})`,
       }}
-      className="relative w-full h-full pt-48 mt-16 bg-contain bg-top bg-no-repeat"
+      className="relative w-full h-full lg:pt-48 md:pt-24 pt-8 mt-20 md:bg-contain bg-[30%] md:bg-top md:bg-no-repeat"
     >
       <Navbar></Navbar>
-      <h1 className="text-6xl text-[#172b4d] font-semibold text-center py-20">
+      <h1 className="text-6xl text-[#172b4d] font-bold text-center md:py-20 py-12">
         Tax Services
       </h1>
       <div className="">

@@ -3,6 +3,7 @@ import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faHotel } from "@fortawesome/free-solid-svg-icons";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faGem } from "@fortawesome/free-solid-svg-icons";
 
 export interface ServiceProps {
   title: string;
@@ -15,12 +16,13 @@ export interface ServiceProps {
 const icons = [
   faDollarSign,
   faHotel,
-  faCrown
+  faCrown,
+  faGem
 ];
 
 function ServiceCard({ title, colour, skills, link, icon }: ServiceProps) {
   return (
-    <div className="w-[360px] p-8 bg-white rounded-md">
+    <div className="sm:w-[360px] w-[320px] p-8 bg-white rounded-md">
       <div className="flex gap-4 py-10">
         <div
           style={{ backgroundColor: colour }}
@@ -39,7 +41,7 @@ function ServiceCard({ title, colour, skills, link, icon }: ServiceProps) {
 
       <ul className="mb-8">
         {skills.map((skill, idx) => (
-          <li key={`skill-${skill}-${idx}`} className="flex gap-4 py-1">
+          <li key={`skill-${skill}-${idx}`} className="flex gap-2 py-1">
             <div
               style={{ backgroundColor: colour }}
               className="w-[25px] h-[25px] rounded-full flex items-center justify-center"

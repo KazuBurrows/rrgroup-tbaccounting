@@ -1,6 +1,7 @@
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import ReviewCard from "./ReviewCard";
+import bg from "../assets/images/p31.svg";
 
 export const slides = [
   {
@@ -47,9 +48,18 @@ function Testimonials() {
     },
   });
   return (
-    <div className="h-full bg-[#172b4d] text-white py-16">
-      <div className="w-3/5 mx-auto text-center">
-        <h1 className="text-4xl font-bold py-8">Hear from clients</h1>
+    <div
+      id="testimonials"
+      className="relative h-full bg-[#172b4d] text-white py-16"
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${bg})`,
+        }}
+      ></div>
+      <div className="xl:w-3/5 sm:w-10/12 mx-auto text-center">
+        <h1 className="text-5xl font-bold py-8">Hear from clients</h1>
         <p className="text-xl w-2/3 mx-auto">
           Lorem ipsum dolor sit amet, consectetur{" "}
           <span className="text-rose-600">
@@ -61,7 +71,10 @@ function Testimonials() {
         <div className="py-8">
           <div ref={sliderRef} className="keen-slider">
             {slides.map((slide, idx) => (
-              <div key={`slide-${slide}-${idx}`} className={`keen-slider__slide number-slide${idx}`}>
+              <div
+                key={`slide-${slide}-${idx}`}
+                className={`keen-slider__slide number-slide${idx}`}
+              >
                 <ReviewCard
                   comment={slide.comment}
                   name={slide.name}

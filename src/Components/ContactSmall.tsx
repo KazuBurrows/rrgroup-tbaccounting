@@ -1,13 +1,13 @@
 function ContactSmall() {
   return (
-    <div className="py-16 text-[#172b4d]">
+    <div className="w-11/12 py-16 text-[#172b4d] md:bg-transparent bg-white mx-auto rounded-md">
       <h2 className="w-fit font-bold bg-sky-300 py-1 px-2 rounded-md mx-auto">
         Leave a message
       </h2>
-      <h1 className="text-5xl font-semibold text-center">
+      <h1 className="text-5xl font-semibold text-center md:px-0 px-4">
         Tell us how we can help you
       </h1>
-      <h3 className="text-center text-xl py-4">
+      <h3 className="text-center text-xl py-4 md:px-0 px-4">
         Whether you have questions or you would just like to say hello, contact
         us.
       </h3>
@@ -17,7 +17,7 @@ function ContactSmall() {
         style={{
           boxShadow: "0 15px 35px #32325d1a, 0 5px 15px #00000012",
         }}
-        className="w-2/5 bg-gray-100 mt-12 p-6 rounded-lg shadow-md mx-auto"
+        className="2xl:w-2/5 xl:w-4/5 bg-gray-100 md:mt-12 p-6 rounded-lg shadow-md mx-auto"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* First Name */}
@@ -61,19 +61,15 @@ function ContactSmall() {
 
           {/* Business Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Business type
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Business type
             </label>
-            <select
+            <input
+              type="text"
+              placeholder="Business type..."
               aria-label="Business type..."
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-              <option>Option 4</option>
-              <option>Option 5</option>
-            </select>
+            />
           </div>
         </div>
 

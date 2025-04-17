@@ -9,8 +9,8 @@ import { faHotel } from "@fortawesome/free-solid-svg-icons";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 const services = [
-    {id: 1, title: "PAYE Services", subTitle: "Registration and filing returns made hassle-free", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "},
-    {id: 2, title: "Intermediary Services", subTitle: "Let us communicate with IRD on your behalf, handling all tax compliance and matters", desc: "We act on behalf of client with IRD to solve any problems comes along."},
+  {id: 1, title: "PAYE Services", subTitle: "Registration and filing returns made hassle-free", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "},
+  {id: 2, title: "Business Advice", subTitle: "Advice is shaped by real-world insight from helping businesses grow, adapt, and thrive", desc: "Financial guidance to help you make smart, confident decisions about cash flow, budgeting, growth, and long-term financial health. "},
 ];
 
 const icons = [
@@ -25,10 +25,10 @@ function Paye() {
       style={{
         backgroundImage: `url(${bg})`,
       }}
-      className="relative w-full h-full pt-48 mt-16 bg-contain bg-top bg-no-repeat"
+      className="relative w-full h-full lg:pt-48 md:pt-24 pt-8 mt-20 md:bg-contain bg-[30%] md:bg-top md:bg-no-repeat"
     >
       <Navbar></Navbar>
-      <h1 className="text-6xl text-[#172b4d] font-semibold text-center py-20">
+      <h1 className="text-6xl text-[#172b4d] font-bold text-center md:py-20 py-12">
         Paye Services
       </h1>
       <div className="">

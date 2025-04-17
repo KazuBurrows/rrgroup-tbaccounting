@@ -5,6 +5,7 @@ import Services from '../Components/Services';
 import Contact from '../Components/Contact';
 import Testimonials from '../Components/Testimonials';
 import Footer from '../Components/Footer';
+import Brands from '../Components/Brands';
 
 
 function Home() {
@@ -15,7 +16,7 @@ function Home() {
         <Services></Services>
         <Contact></Contact>
         <Testimonials></Testimonials>
-        <div className='bg-white h-4'></div>
+        <Brands></Brands>
         <Footer></Footer>
     </div>
 
