@@ -1,5 +1,4 @@
 import bg from "../assets/images/pattern_pricing5.svg";
-import logo from "../assets/images/tb-accounting-logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
 import { faMailBulk } from "@fortawesome/free-solid-svg-icons";
