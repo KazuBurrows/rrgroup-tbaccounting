@@ -60,13 +60,6 @@ function Testimonials() {
       ></div>
       <div className="xl:w-3/5 sm:w-10/12 mx-auto text-center">
         <h1 className="text-5xl font-bold py-8">Hear from clients</h1>
-        <p className="text-xl w-2/3 mx-auto">
-          Lorem ipsum dolor sit amet, consectetur{" "}
-          <span className="text-rose-600">
-            sed do eiusmod tempor incididunt
-          </span>{" "}
-          magna aliqua. quis nostrud exercitation ullamco.
-        </p>
 
         <div className="py-8">
           <div ref={sliderRef} className="keen-slider">

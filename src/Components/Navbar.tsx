@@ -21,7 +21,7 @@ function Navbar() {
     <>
       <nav
       id="navbar"
-      className="fixed top-0 left-0 z-50 md:flex hidden w-full bg-[#172b4d] py-6 sm:px-16 px-4 items-center"
+      className="fixed top-0 left-0 z-50 md:flex hidden w-full bg-black py-6 sm:px-16 px-4 items-center"
     >
       <div className="navbar-logo w-[75px]">
         <a href="/"><img src={logo} alt='TBA Logo'></img></a>
@@ -35,7 +35,7 @@ function Navbar() {
         ))}
       </div>
     </nav>
-    <nav className="fixed top-0 left-0 z-50 w-full bg-[#172b4d] py-6 sm:px-16 px-4 md:hidden flex items-center justify-between">
+    <nav className="fixed top-0 left-0 z-50 w-full bg-black py-6 sm:px-16 px-4 md:hidden flex items-center justify-between">
       {/* Logo */}
       <div className="navbar-logo w-[75px]">
         <a href="/">
