@@ -15,8 +15,8 @@ function Home() {
         <Hero></Hero>
         <Services></Services>
         <Contact></Contact>
-        <Testimonials></Testimonials>
         <Brands></Brands>
+        <Testimonials></Testimonials>
         <Footer></Footer>
     </div>
 

@@ -279,7 +279,7 @@ function Contact() {
             </button>
           </form>
         </div>
-        <img className="mx-auto py-12 w-[90px]" src={logo} alt="tba logo" />
+        {/* <img className="mx-auto py-12 w-[90px]" src={logo} alt="tba logo" /> */}
       </div>
     </div>
   );
