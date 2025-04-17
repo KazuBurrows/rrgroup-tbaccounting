@@ -1,6 +1,9 @@
 import bg from "../assets/images/p31.svg";
 import ServiceCard from "./ServiceCard";
 
+import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
+import { faIdBadge } from "@fortawesome/free-solid-svg-icons";
+import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 
 
 function Services() {
@@ -29,9 +32,9 @@ function Services() {
         </h3>
       </div>
       <div className="flex py-16 gap-4 justify-center">
-        <ServiceCard title={"Financing"} colour={"#5e72e4"} skills={["End-of-Year Finance Reports", "Monthly Management Reports", "Budget/Forecasting"]} link={"/"}></ServiceCard>
-        <ServiceCard title={"Tax"} colour={"#2dce89"} skills={["Tax Planning", "Income Tax Services", "GST Registration and Returns"]} link={"/"}></ServiceCard>
-        <ServiceCard title={"PAYE"} colour={"#fb6340"} skills={["PAYE Services", "Intermediary Services"]} link={"/"}></ServiceCard>
+        <ServiceCard title={"Financing"} colour={"#5e72e4"} skills={["End-of-Year Finance Reports", "Monthly Management Reports", "Budget/Forecasting"]} link={"/financing"} icon={faMoneyBill}></ServiceCard>
+        <ServiceCard title={"Tax"} colour={"#2dce89"} skills={["Tax Planning", "Income Tax Services", "GST Registration and Returns"]} link={"/tax"} icon={faIdBadge}></ServiceCard>
+        <ServiceCard title={"PAYE"} colour={"#fb6340"} skills={["PAYE Services", "Intermediary Services"]} link={"/paye"} icon={faCreditCard}></ServiceCard>
       </div>
     </div>
   );
