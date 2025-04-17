@@ -44,7 +44,7 @@ function Contact() {
               <div>
                 <h2 className="text-3xl font-semibold">Call Us</h2>
                 <p>
-                  support@tbaccounting.co.nz
+                  support@rrgroup.co.nz
                   <br />
                   +64 021 821 8338
                   <br />
