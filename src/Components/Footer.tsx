@@ -17,6 +17,7 @@ function Footer() {
           <a
             href="https://www.facebook.com/profile.php?id=61556394147297"
             target="_blank"
+            rel="noreferrer"
             className="p-6 h-[60px] w-[60px] rounded-full flex items-center justify-center"
           >
             <FontAwesomeIcon
