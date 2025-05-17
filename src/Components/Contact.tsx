@@ -41,8 +41,8 @@ function Contact() {
     };
 
     const formData = toFormData(emailMessage);
-
-    const url = "https://kazukicomapi.azurewebsites.net/api/EmailTbaccounting?code=kO16RHuZUjBEE15xL-zBaAIZe0RXlRPSn3XSTTBkP4gOAzFup2hlAg=="; // Your Azure API endpoint
+    
+    const url = `${process.env.REACT_APP_API_URL}?code=${process.env.REACT_APP_API_KEY}`;
     try {
       const response = await fetch(url, {
         method: "POST",
