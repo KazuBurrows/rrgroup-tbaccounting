@@ -1,9 +1,65 @@
+import { useState } from "react";
+
 import bg from "../assets/images/pattern_pricing5.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
 import { faMailBulk } from "@fortawesome/free-solid-svg-icons";
 
 function Contact() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const toFormData = (emailMessage: any): FormData => {
+    const formData = new FormData();
+
+    // Add simple fields
+    formData.append("firstName", emailMessage.firstName);
+    formData.append("lastName", emailMessage.lastName);
+    formData.append("businessName", emailMessage.businessName);
+    formData.append("businessType", emailMessage.businessType);
+    formData.append("phone", emailMessage.phone);
+    formData.append("email", emailMessage.email);
+    formData.append("message", emailMessage.message);
+
+    return formData;
+  };
+
+  const sendEmail = async () => {
+    const emailMessage = {
+      firstName: firstName,
+      lastName: lastName,
+      businessName: businessName,
+      businessType: businessType,
+      phone: phone,
+      email: email,
+      message: message,
+    };
+
+    const formData = toFormData(emailMessage);
+
+    const url = "https://kazukicomapi.azurewebsites.net/api/EmailTbaccounting?code=kO16RHuZUjBEE15xL-zBaAIZe0RXlRPSn3XSTTBkP4gOAzFup2hlAg=="; // Your Azure API endpoint
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // const result = await response.json(); // Parse the response as JSON
+      // console.log(result); // Handle the result (e.g., display message, update state)
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div
       id="contact"
@@ -69,6 +125,8 @@ function Contact() {
                   type="text"
                   placeholder="First Name"
                   aria-label="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col w-1/2 gap-1">
@@ -76,8 +134,10 @@ function Contact() {
                 <input
                   className="py-1 px-2 rounded-md"
                   type="text"
-                  placeholder="Last Name..."
-                  aria-label="Last Name..."
+                  placeholder="Last Name"
+                  aria-label="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
             </div>
@@ -91,21 +151,20 @@ function Contact() {
                   type="text"
                   placeholder="Business name"
                   aria-label="Business name"
+                  value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col w-1/2 gap-1">
                 <label className="text-white">Business type</label>
-                <select
-                  className="py-1.5 px-2 rounded-md"
+                <input
+                  className="py-1 px-2 rounded-md"
+                  type="text"
+                  placeholder="Business type"
                   aria-label="Business type"
-                  defaultValue="Option 1"
-                >
-                  <option value="Option 1">Option 1</option>
-                  <option value="Option 2">Option 2</option>
-                  <option value="Option 3">Option 3</option>
-                  <option value="Option 4">Option 4</option>
-                  <option value="Option 5">Option 5</option>
-                </select>
+                  value={businessType}
+                  onChange={(e) => setBusinessType(e.target.value)}
+                />
               </div>
             </div>
             {/* BUSINESS NAME TYPE END*/}
@@ -117,6 +176,8 @@ function Contact() {
                 type="text"
                 placeholder="Phone number"
                 aria-label="Phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             {/* PHONE END*/}
@@ -127,6 +188,8 @@ function Contact() {
                 className="py-1 px-2 rounded-md"
                 type="text"
                 placeholder="Email Here"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             {/* EMAIL END*/}
@@ -136,12 +199,15 @@ function Contact() {
               <textarea
                 className="py-1 px-2 rounded-md"
                 name="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               ></textarea>
             </div>
             {/* MESSAGE END*/}
             <button
               className="bg-rose-600 py-2 px-4 rounded-lg text-white"
-              type="submit"
+              type="button"
+              onClick={sendEmail}
             >
               Send Message
             </button>
@@ -205,6 +271,8 @@ function Contact() {
                   type="text"
                   placeholder="First Name"
                   aria-label="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col sm:w-1/2 gap-1 sm:pt-0 pt-4">
@@ -212,8 +280,10 @@ function Contact() {
                 <input
                   className="py-1 px-2 rounded-md"
                   type="text"
-                  placeholder="Last Name..."
-                  aria-label="Last Name..."
+                  placeholder="Last Name"
+                  aria-label="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
             </div>
@@ -227,15 +297,19 @@ function Contact() {
                   type="text"
                   placeholder="Business name"
                   aria-label="Business name"
+                  value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col sm:w-1/2 gap-1 sm:pt-0 pt-4">
-              <label className="text-white">Business type</label>
+                <label className="text-white">Business type</label>
                 <input
                   className="py-1 px-2 rounded-md"
                   type="text"
                   placeholder="Business type"
                   aria-label="Business type"
+                  value={businessType}
+                  onChange={(e) => setBusinessType(e.target.value)}
                 />
               </div>
             </div>
@@ -248,6 +322,8 @@ function Contact() {
                 type="text"
                 placeholder="Phone number"
                 aria-label="Phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             {/* PHONE END*/}
@@ -258,6 +334,8 @@ function Contact() {
                 className="py-1 px-2 rounded-md"
                 type="text"
                 placeholder="Email Here"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             {/* EMAIL END*/}
@@ -267,12 +345,15 @@ function Contact() {
               <textarea
                 className="py-1 px-2 rounded-md"
                 name="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               ></textarea>
             </div>
             {/* MESSAGE END*/}
             <button
               className="bg-rose-600 py-2 px-4 rounded-lg text-white"
-              type="submit"
+              type="button"
+              onClick={sendEmail}
             >
               Send Message
             </button>

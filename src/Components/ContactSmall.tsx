@@ -1,4 +1,60 @@
+import { useState } from "react";
+
+
 function ContactSmall() {
+  const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [businessName, setBusinessName] = useState("");
+    const [businessType, setBusinessType] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+  
+    const toFormData = (emailMessage: any): FormData => {
+      const formData = new FormData();
+  
+      // Add simple fields
+      formData.append("firstName", emailMessage.firstName);
+      formData.append("lastName", emailMessage.lastName);
+      formData.append("businessName", emailMessage.businessName);
+      formData.append("businessType", emailMessage.businessType);
+      formData.append("phone", emailMessage.phone);
+      formData.append("email", emailMessage.email);
+      formData.append("message", emailMessage.message);
+  
+      return formData;
+    };
+  
+    const sendEmail = async () => {
+      const emailMessage = {
+        firstName: firstName,
+        lastName: lastName,
+        businessName: businessName,
+        businessType: businessType,
+        phone: phone,
+        email: email,
+        message: message,
+      };
+  
+      const formData = toFormData(emailMessage);
+  
+      const url = "https://kazukicomapi.azurewebsites.net/api/EmailTbaccounting?code=kO16RHuZUjBEE15xL-zBaAIZe0RXlRPSn3XSTTBkP4gOAzFup2hlAg=="; // Your Azure API endpoint
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+  
+        // const result = await response.json(); // Parse the response as JSON
+        // console.log(result); // Handle the result (e.g., display message, update state)
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
   return (
     <div className="w-11/12 py-16 text-[#172b4d] md:bg-transparent bg-white mx-auto rounded-md">
       <h2 className="w-fit font-bold bg-sky-300 py-1 px-2 rounded-md mx-auto">
@@ -27,9 +83,11 @@ function ContactSmall() {
             </label>
             <input
               type="text"
-              placeholder="First Name..."
-              aria-label="First Name..."
+              placeholder="First Name"
+              aria-label="First Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
 
@@ -40,9 +98,11 @@ function ContactSmall() {
             </label>
             <input
               type="text"
-              placeholder="Last Name..."
-              aria-label="Last Name..."
+              placeholder="Last Name"
+              aria-label="Last Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
             />
           </div>
 
@@ -53,9 +113,11 @@ function ContactSmall() {
             </label>
             <input
               type="text"
-              placeholder="Business Name..."
-              aria-label="Business Name..."
+              placeholder="Business Name"
+              aria-label="Business Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
             />
           </div>
 
@@ -66,23 +128,43 @@ function ContactSmall() {
             </label>
             <input
               type="text"
-              placeholder="Business type..."
-              aria-label="Business type..."
+              placeholder="Business type"
+              aria-label="Business type"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={businessType}
+                  onChange={(e) => setBusinessType(e.target.value)}
             />
           </div>
-        </div>
 
-        {/* Email */}
-        <div className="mt-4">
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email address
+            </label>
+            <input
+              type="text"
+              placeholder="Email Here"
+              aria-label="Email Here"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          {/* Business Type */}
+          <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email address
-          </label>
-          <input
-            type="text"
-            placeholder="Email Here..."
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+            Phone number
+            </label>
+            <input
+              type="text"
+              placeholder="Phone number"
+              aria-label="Phone number"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
         </div>
 
         {/* Message */}
@@ -94,14 +176,17 @@ function ContactSmall() {
             name="message"
             rows={6}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={message}
+                  onChange={(e) => setMessage(e.target.value)}
           ></textarea>
         </div>
 
         {/* Submit Button */}
         <div className="mt-6 text-right">
           <button
-            type="submit"
+            type="button"
             className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
+            onClick={sendEmail}
           >
             Send Message
           </button>
