@@ -1,60 +1,77 @@
 import { useState } from "react";
 
-
 function ContactSmall() {
   const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [businessName, setBusinessName] = useState("");
-    const [businessType, setBusinessType] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
-  
-    const toFormData = (emailMessage: any): FormData => {
-      const formData = new FormData();
-  
-      // Add simple fields
-      formData.append("firstName", emailMessage.firstName);
-      formData.append("lastName", emailMessage.lastName);
-      formData.append("businessName", emailMessage.businessName);
-      formData.append("businessType", emailMessage.businessType);
-      formData.append("phone", emailMessage.phone);
-      formData.append("email", emailMessage.email);
-      formData.append("message", emailMessage.message);
-  
-      return formData;
+  const [lastName, setLastName] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const resetForm = () => {
+    setFirstName("");
+    setLastName("");
+    setBusinessName("");
+    setBusinessType("");
+    setPhone("");
+    setEmail("");
+    setMessage("");
+  };
+
+  const toFormData = (emailMessage: any): FormData => {
+    const formData = new FormData();
+
+    // Add simple fields
+    formData.append("firstName", emailMessage.firstName);
+    formData.append("lastName", emailMessage.lastName);
+    formData.append("businessName", emailMessage.businessName);
+    formData.append("businessType", emailMessage.businessType);
+    formData.append("phone", emailMessage.phone);
+    formData.append("email", emailMessage.email);
+    formData.append("message", emailMessage.message);
+
+    return formData;
+  };
+
+  const sendEmail = async () => {
+    setStatus("sending");
+    const emailMessage = {
+      firstName: firstName,
+      lastName: lastName,
+      businessName: businessName,
+      businessType: businessType,
+      phone: phone,
+      email: email,
+      message: message,
     };
-  
-    const sendEmail = async () => {
-      const emailMessage = {
-        firstName: firstName,
-        lastName: lastName,
-        businessName: businessName,
-        businessType: businessType,
-        phone: phone,
-        email: email,
-        message: message,
-      };
-  
-      const formData = toFormData(emailMessage);
-  
-      const url = `${process.env.REACT_APP_API_URL}?code=${process.env.REACT_APP_API_KEY}`;
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          body: formData,
-        });
-  
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-  
-        // const result = await response.json(); // Parse the response as JSON
-        // console.log(result); // Handle the result (e.g., display message, update state)
-      } catch (error) {
-        console.error("Error:", error);
+
+    const formData = toFormData(emailMessage);
+
+    const url = `${process.env.REACT_APP_API_URL}?code=${process.env.REACT_APP_API_KEY}`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        // grab any error text the API returns
+        const text = await response.text();
+        throw new Error(text || "Network response was not ok");
       }
-    };
+      setStatus("success");
+      resetForm();
+    } catch (err: any) {
+      console.error("Error:", err);
+      setErrorMsg(err.message || "Something went wrong");
+      setStatus("error");
+    }
+  };
   return (
     <div className="w-11/12 py-16 text-[#172b4d] md:bg-transparent bg-white mx-auto rounded-md">
       <h2 className="w-fit font-bold bg-sky-300 py-1 px-2 rounded-md mx-auto">
@@ -87,7 +104,7 @@ function ContactSmall() {
               aria-label="First Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
 
@@ -102,7 +119,7 @@ function ContactSmall() {
               aria-label="Last Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
 
@@ -117,14 +134,14 @@ function ContactSmall() {
               aria-label="Business Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={businessName}
-                  onChange={(e) => setBusinessName(e.target.value)}
+              onChange={(e) => setBusinessName(e.target.value)}
             />
           </div>
 
           {/* Business Type */}
           <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Business type
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Business type
             </label>
             <input
               type="text"
@@ -132,10 +149,9 @@ function ContactSmall() {
               aria-label="Business type"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={businessType}
-                  onChange={(e) => setBusinessType(e.target.value)}
+              onChange={(e) => setBusinessType(e.target.value)}
             />
           </div>
-
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -147,14 +163,14 @@ function ContactSmall() {
               aria-label="Email Here"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           {/* Business Type */}
           <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Phone number
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Phone number
             </label>
             <input
               type="text"
@@ -162,7 +178,7 @@ function ContactSmall() {
               aria-label="Phone number"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
         </div>
@@ -177,7 +193,7 @@ function ContactSmall() {
             rows={6}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value)}
           ></textarea>
         </div>
 
@@ -185,12 +201,32 @@ function ContactSmall() {
         <div className="mt-6 text-right">
           <button
             type="button"
-            className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+            disabled={status === "sending"}
             onClick={sendEmail}
           >
-            Send Message
+            {status === "sending" ? "Sending…" : "Send"}
           </button>
         </div>
+        {/* feedback area */}
+        {status === "success" && (
+          <p className="text-green-600">Your message has been sent! 🎉</p>
+        )}
+        {status === "error" && (
+          <div className="text-red-600 space-y-1">
+            <p>Failed to send message: {errorMsg}</p>
+            <p>
+              Or contact us directly at{" "}
+              <a
+                href="mailto:support@tbaccounting.rrgroup.co.nz"
+                className="underline hover:text-red-800"
+              >
+                support@tbaccounting.rrgroup.co.nz
+              </a>
+              .
+            </p>
+          </div>
+        )}
       </form>
     </div>
   );

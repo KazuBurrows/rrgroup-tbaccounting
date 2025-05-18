@@ -14,6 +14,20 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+    const [errorMsg, setErrorMsg] = useState<string>("");
+  
+    const resetForm = () => {
+      setFirstName("");
+      setLastName("");
+      setBusinessName("");
+      setBusinessType("");
+      setPhone("");
+      setEmail("");
+      setMessage("");
+    };
+
+
   const toFormData = (emailMessage: any): FormData => {
     const formData = new FormData();
 
@@ -30,6 +44,7 @@ function Contact() {
   };
 
   const sendEmail = async () => {
+    setStatus("sending");
     const emailMessage = {
       firstName: firstName,
       lastName: lastName,
@@ -43,21 +58,23 @@ function Contact() {
     const formData = toFormData(emailMessage);
     
     const url = `${process.env.REACT_APP_API_URL}?code=${process.env.REACT_APP_API_KEY}`;
-    try {
+      try {
       const response = await fetch(url, {
         method: "POST",
         body: formData,
       });
-
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        // grab any error text the API returns
+        const text = await response.text();
+        throw new Error(text || "Network response was not ok");
       }
-
-      // const result = await response.json(); // Parse the response as JSON
-      // console.log(result); // Handle the result (e.g., display message, update state)
-    } catch (error) {
-      console.error("Error:", error);
-    }
+      setStatus("success");
+      resetForm();
+      } catch (err: any) {
+        console.error("Error:", err);
+        setErrorMsg(err.message || "Something went wrong");
+        setStatus("error");
+      }
   };
 
   return (
@@ -207,10 +224,30 @@ function Contact() {
             <button
               className="bg-rose-600 py-2 px-4 rounded-lg text-white"
               type="button"
+              disabled={status === "sending"}
               onClick={sendEmail}
             >
-              Send Message
+              {status === "sending" ? "Sending…" : "Send"}
             </button>
+            {/* feedback area */}
+            {status === "success" && (
+              <p className="text-green-600">Your message has been sent! 🎉</p>
+            )}
+            {status === "error" && (
+              <div className="text-red-600 space-y-1">
+                <p>Failed to send message: {errorMsg}</p>
+                <p>
+                  Or contact us directly at{" "}
+                  <a
+                    href="mailto:support@tbaccounting.rrgroup.co.nz"
+                    className="underline hover:text-red-800"
+                  >
+                    support@tbaccounting.rrgroup.co.nz
+                  </a>
+                  .
+                </p>
+              </div>
+            )}
           </form>
         </div>
       </div>
@@ -353,10 +390,30 @@ function Contact() {
             <button
               className="bg-rose-600 py-2 px-4 rounded-lg text-white"
               type="button"
+              disabled={status === "sending"}
               onClick={sendEmail}
             >
-              Send Message
+              {status === "sending" ? "Sending…" : "Send"}
             </button>
+            {/* feedback area */}
+            {status === "success" && (
+              <p className="text-green-600">Your message has been sent! 🎉</p>
+            )}
+            {status === "error" && (
+              <div className="text-red-600 space-y-1">
+                <p>Failed to send message: {errorMsg}</p>
+                <p>
+                  Or contact us directly at{" "}
+                  <a
+                    href="mailto:support@tbaccounting.rrgroup.co.nz"
+                    className="underline hover:text-red-800"
+                  >
+                    support@tbaccounting.rrgroup.co.nz
+                  </a>
+                  .
+                </p>
+              </div>
+            )}
           </form>
         </div>
         {/* <img className="mx-auto py-12 w-[90px]" src={logo} alt="tba logo" /> */}
